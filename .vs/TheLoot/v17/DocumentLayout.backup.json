@@ -1,0 +1,227 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|d:\\users\\andrew jenks\\documents\\github\\theloot\\theloot\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|solutionrelative:theloot\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|d:\\users\\andrew jenks\\documents\\github\\theloot\\theloot\\controllers\\plaidcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|solutionrelative:theloot\\controllers\\plaidcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|d:\\users\\andrew jenks\\documents\\github\\theloot\\theloot\\data\\userplaidaccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|solutionrelative:theloot\\data\\userplaidaccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|d:\\users\\andrew jenks\\documents\\github\\theloot\\theloot\\services\\plaidservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|solutionrelative:theloot\\services\\plaidservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|d:\\users\\andrew jenks\\documents\\github\\theloot\\theloot\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|solutionrelative:theloot\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|d:\\users\\andrew jenks\\documents\\github\\theloot\\theloot\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|solutionrelative:theloot\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|d:\\users\\andrew jenks\\documents\\github\\theloot\\theloot\\migrations\\20250712155948_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|solutionrelative:theloot\\migrations\\20250712155948_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|d:\\users\\andrew jenks\\documents\\github\\theloot\\theloot\\migrations\\applicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|solutionrelative:theloot\\migrations\\applicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|d:\\users\\andrew jenks\\documents\\github\\theloot\\theloot\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|solutionrelative:theloot\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|d:\\users\\andrew jenks\\documents\\github\\theloot\\theloot\\data\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|solutionrelative:theloot\\data\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|d:\\users\\andrew jenks\\documents\\github\\theloot\\theloot\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7AB0929F-D691-4447-B54F-78604B0A2FB0}|TheLoot\\TheLoot.csproj|solutionrelative:theloot\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 370,
+          "SelectedChildIndex": 12,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cf577b8c-4134-11d2-83e5-00c04f9902c1}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserPlaidAccount.cs",
+              "DocumentMoniker": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Data\\UserPlaidAccount.cs",
+              "RelativeDocumentMoniker": "TheLoot\\Data\\UserPlaidAccount.cs",
+              "ToolTip": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Data\\UserPlaidAccount.cs",
+              "RelativeToolTip": "TheLoot\\Data\\UserPlaidAccount.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-12T16:11:08.771Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlaidController.cs",
+              "DocumentMoniker": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Controllers\\PlaidController.cs",
+              "RelativeDocumentMoniker": "TheLoot\\Controllers\\PlaidController.cs",
+              "ToolTip": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Controllers\\PlaidController.cs",
+              "RelativeToolTip": "TheLoot\\Controllers\\PlaidController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-12T16:05:47.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PlaidService.cs",
+              "DocumentMoniker": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Services\\PlaidService.cs",
+              "RelativeDocumentMoniker": "TheLoot\\Services\\PlaidService.cs",
+              "ToolTip": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Services\\PlaidService.cs",
+              "RelativeToolTip": "TheLoot\\Services\\PlaidService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-12T16:05:05.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ApplicationDbContextModelSnapshot.cs",
+              "DocumentMoniker": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "TheLoot\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "ToolTip": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "RelativeToolTip": "TheLoot\\Migrations\\ApplicationDbContextModelSnapshot.cs",
+              "ViewState": "AgIAAAEBAAAAAAAAAAAgwBAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-12T16:00:04.096Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "20250712155948_InitialCreate.cs",
+              "DocumentMoniker": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Migrations\\20250712155948_InitialCreate.cs",
+              "RelativeDocumentMoniker": "TheLoot\\Migrations\\20250712155948_InitialCreate.cs",
+              "ToolTip": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Migrations\\20250712155948_InitialCreate.cs",
+              "RelativeToolTip": "TheLoot\\Migrations\\20250712155948_InitialCreate.cs",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-12T15:59:53.967Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\appsettings.json",
+              "RelativeDocumentMoniker": "TheLoot\\appsettings.json",
+              "ToolTip": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\appsettings.json",
+              "RelativeToolTip": "TheLoot\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-12T15:42:45.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Program.cs",
+              "RelativeDocumentMoniker": "TheLoot\\Program.cs",
+              "ToolTip": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Program.cs",
+              "RelativeToolTip": "TheLoot\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-12T15:42:37.385Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "TheLoot\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "TheLoot\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-12T15:42:31.709Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Components\\_Imports.razor",
+              "RelativeDocumentMoniker": "TheLoot\\Components\\_Imports.razor",
+              "ToolTip": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Components\\_Imports.razor",
+              "RelativeToolTip": "TheLoot\\Components\\_Imports.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-12T15:43:52.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "App.razor",
+              "DocumentMoniker": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Components\\App.razor",
+              "RelativeDocumentMoniker": "TheLoot\\Components\\App.razor",
+              "ToolTip": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Components\\App.razor",
+              "RelativeToolTip": "TheLoot\\Components\\App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-12T15:43:40.203Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Data\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "TheLoot\\Data\\ApplicationUser.cs",
+              "ToolTip": "D:\\Users\\Andrew Jenks\\Documents\\Github\\TheLoot\\TheLoot\\Data\\ApplicationUser.cs",
+              "RelativeToolTip": "TheLoot\\Data\\ApplicationUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-12T15:42:35.636Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

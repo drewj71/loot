@@ -1,0 +1,1 @@
+D:\Users\Andrew Jenks\Documents\Github\TheLoot\TheLoot.Client\obj\Debug\net9.0\staticwebassets.build.json
