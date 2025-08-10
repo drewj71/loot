@@ -1,0 +1,173 @@
+@page "/transactions"
+@using GimmeTheLoot.Shared.Models.Entity
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject JwtAuthenticationStateProvider JwtAuthProvider
+
+<MudPaper Class="pa-4">
+    <div class="d-flex justify-space-between align-center mb-4">
+        <MudText Typo="Typo.h5">Transactions</MudText>
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SyncTransactions" Disabled="@_isLoading">
+            @if (_isLoading)
+            {
+                <MudText Typo="Typo.body2">Syncing...</MudText>
+                <MudProgressCircular Indeterminate Size="Size.Small" Class="mx-2" />
+            }
+            else
+            {
+                <MudText Typo="Typo.body2">Sync Transactions</MudText>
+                <MudIcon Icon="@Icons.Material.Filled.CloudSync" Class="mx-2" />
+            }
+        </MudButton>
+    </div>
+
+
+    <MudTable Items="_transactions"
+              Dense="true"
+              Hover="true"
+              Bordered="true"
+              Filter="new Func<Transaction, bool>(FilterTransactions)">
+        <ToolBarContent>
+            <MudTextField @bind-Value="_searchTerm"
+                          Placeholder="Search"
+                          Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          IconSize="Size.Medium"
+                          Class="mt-0" />
+        </ToolBarContent>
+
+        <HeaderContent>
+            <MudTh>Logo</MudTh>
+            <MudTh>Name</MudTh>
+            <MudTh>Category</MudTh>
+            <MudTh>Amount</MudTh>
+            <MudTh>Date</MudTh>
+        </HeaderContent>
+
+        <RowTemplate>
+            <MudTd DataLabel="Logo">
+                <MudAvatar>
+                    @if (!string.IsNullOrWhiteSpace(context.LogoURL))
+                    {
+                        <MudImage Src="@context.LogoURL" Alt="@context.MerchantName" />
+                    }
+                    else
+                    {
+                        var name = context.Name.ToLowerInvariant();
+
+                        if (name.Contains("credit card"))
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.CreditCard"></MudIcon>
+                        }
+                        else if (name.Contains("intrst"))
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.AttachMoney"></MudIcon>
+                        }
+                        else if (!string.IsNullOrEmpty(name))
+                        {
+                            @char.ToUpper(name[0])
+                        }
+                        else
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.HelpOutline"></MudIcon>
+                        }
+                    }
+                </MudAvatar>
+            </MudTd>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Category">@context.TransactionCategory?.CustomDisplay</MudTd>
+            <MudTd DataLabel="Amount" Align="Right">
+                <MudText Color="@(context.Amount >= 0 ? Color.Error : Color.Success)">
+                    @context.Amount.ToString("C")
+                </MudText>
+
+            </MudTd>
+
+            <MudTd DataLabel="Date">@context.Date.ToString("MM/dd/yy hh:mm tt")</MudTd>
+        </RowTemplate>
+
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+</MudPaper>
+
+@code {
+    private bool _isLoading;
+    private List<Transaction> _transactions = new();
+    private string _searchTerm = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTransactions();
+    }
+
+    private async Task LoadTransactions()
+    {
+        try
+        {
+            var token = await JwtAuthProvider.GetTokenAsync();
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                // No token — optionally navigate to login or show a message
+                _transactions = new List<Transaction>();
+                return;
+            }
+
+            var request = new HttpRequestMessage(HttpMethod.Get, "api/accounts/user-transactions"); // make sure your backend route matches
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            var response = await Http.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var transactions = await response.Content.ReadFromJsonAsync<List<Transaction>>();
+                _transactions = transactions ?? new List<Transaction>();
+            }
+            else
+            {
+                // handle failures (401, 500, etc.)
+                Console.WriteLine($"Failed to load transactions: {response.StatusCode}");
+                _transactions = new List<Transaction>();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading transactions: {ex.Message}");
+            _transactions = new List<Transaction>();
+        }
+    }
+
+    private bool FilterTransactions(Transaction tx)
+    {
+        if (string.IsNullOrWhiteSpace(_searchTerm))
+            return true;
+
+        return (tx.Name?.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)
+            || (tx.Category?.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)
+            || tx.Date.ToString("yyyy-MM-dd").Contains(_searchTerm, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private async Task SyncTransactions()
+    {
+        _isLoading = true;
+        try
+        {
+            var token = await JwtAuthProvider.GetTokenAsync();
+            var request = new HttpRequestMessage(HttpMethod.Post, "api/plaid/sync-transactions"); // make sure your backend route matches
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadTransactions();
+                StateHasChanged();
+            }
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+}

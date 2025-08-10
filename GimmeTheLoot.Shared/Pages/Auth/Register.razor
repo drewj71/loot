@@ -1,0 +1,86 @@
+@page "/auth/register"
+@using System.ComponentModel.DataAnnotations
+@inject HttpClient Http
+@inject NavigationManager NavManager
+
+<MudCard Class="mx-auto mt-6" Style="max-width:400px;">
+    <MudCardContent>
+        <MudText Typo="Typo.h5" Class="mb-4">Register</MudText>
+
+        <EditForm Model="@registerModel" OnValidSubmit="RegisterUser">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <MudTextField @bind-Value="registerModel.Email" Label="Email" For="@(() => registerModel.Email)" Required="true" />
+            <ValidationMessage For="@(() => registerModel.Email)" />
+
+            <MudTextField @bind-Value="registerModel.Password" Label="Password" InputType="InputType.Password" For="@(() => registerModel.Password)" Required="true" />
+            <ValidationMessage For="@(() => registerModel.Password)" />
+
+            <MudTextField @bind-Value="registerModel.ConfirmPassword" Label="Confirm Password" InputType="InputType.Password" For="@(() => registerModel.ConfirmPassword)" Required="true" />
+            <ValidationMessage For="@(() => registerModel.ConfirmPassword)" />
+
+            <MudButton Class="mt-4" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@IsBusy">Register</MudButton>
+        </EditForm>
+
+        @if (!string.IsNullOrEmpty(ErrorMessage))
+        {
+            <MudText Color="Color.Error" Class="mt-2">@ErrorMessage</MudText>
+        }
+    </MudCardContent>
+</MudCard>
+
+@code {
+    private RegisterModel registerModel = new();
+
+    private bool IsBusy = false;
+    private string? ErrorMessage;
+
+    private async Task RegisterUser()
+    {
+        // Clear previous error
+        ErrorMessage = null;
+
+        if (registerModel.Password != registerModel.ConfirmPassword)
+        {
+            ErrorMessage = "Passwords do not match";
+            return;
+        }
+
+        IsBusy = true;
+
+        var response = await Http.PostAsJsonAsync("https://localhost:7027/api/auth/register", new
+        {
+            Email = registerModel.Email,
+            Password = registerModel.Password
+        });
+
+        if (response.IsSuccessStatusCode)
+        {
+            NavManager.NavigateTo("/login");
+        }
+        else
+        {
+            var errors = await response.Content.ReadFromJsonAsync<IEnumerable<IdentityErrorDTO>>();
+            ErrorMessage = string.Join(", ", errors?.Select(e => e.Description) ?? new[] { "Registration failed" });
+        }
+
+        IsBusy = false;
+    }
+
+    private record IdentityErrorDTO(string Code, string Description);
+
+    public class RegisterModel
+    {
+        [Required(ErrorMessage = "Email is required.")]
+        [EmailAddress(ErrorMessage = "Invalid email address.")]
+        public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Password is required.")]
+        public string Password { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Confirm Password is required.")]
+        [Compare(nameof(Password), ErrorMessage = "Passwords do not match.")]
+        public string ConfirmPassword { get; set; } = string.Empty;
+    }
+}

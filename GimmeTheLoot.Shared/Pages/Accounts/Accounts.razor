@@ -1,0 +1,189 @@
+﻿@page "/accounts"
+@using GimmeTheLoot.Shared.Models.Entity
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Text.Json
+@inject JwtAuthenticationStateProvider JwtAuthProvider
+@inject NavigationManager NavManager
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<MudPaper Class="pa-4">
+    <AuthorizeView>
+        <Authorized>
+            <MudStack Spacing="2">
+                <div class="d-flex justify-space-between align-center mb-4">
+                    <MudText Typo="Typo.h5" Class="fw-bold">Your Linked Accounts</MudText>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@StartPlaidLink">
+                        Link New Account
+                        <MudIcon Icon="@Icons.Material.Filled.Link" Class="mx-2" />
+                    </MudButton>
+                    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="@RefreshBalances" Disabled="@isRefreshing">
+                        @if (isRefreshing)
+                        {
+                            <MudText Typo="Typo.subtitle1">Refreshing...</MudText>
+                            <MudProgressCircular Indeterminate Size="Size.Small" Class="mx-2" />
+                        }
+                        else
+                        {
+                            <MudText Typo="Typo.subtitle1">Refresh Balances</MudText>
+                            <MudIcon Icon="@Icons.Material.Filled.Refresh" Class="mx-2" />
+                        }
+                    </MudButton>
+                </div>
+
+                @if (linkedAccounts?.Any() == true)
+                {
+                    <MudTable Items="linkedAccounts" Hover="true" Elevation="0">
+                        <HeaderContent>
+                            <MudTh>Institution</MudTh>
+                            <MudTh>Account Name</MudTh>
+                            <MudTh>Type</MudTh>
+                            <MudTh>Balance</MudTh>
+                        </HeaderContent>
+                        <RowTemplate Context="account">
+                            <MudTd>@account.OfficialName</MudTd>
+                            <MudTd>@account.Name</MudTd>
+                            <MudTd>@account.Subtype</MudTd>
+                            <MudTd>@string.Format("{0:C}", account.CurrentBalance)</MudTd>
+                        </RowTemplate>
+                    </MudTable>
+                }
+                else
+                {
+                    <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="mt-4">
+                        No accounts linked yet. Click <b>Link New Account</b> to get started.
+                    </MudAlert>
+                }
+            </MudStack>
+        </Authorized>
+
+        <NotAuthorized>
+            <MudGrid Class="full-height-grid align-center justify-center">
+                <MudItem xs="12" sm="8" md="6" lg="4">
+                    <MudPaper Class="pa-6 text-center" Elevation="2">
+                        <MudIcon Icon="@Icons.Material.Filled.Lock" Size="Size.Large" Color="Color.Primary" />
+                        <MudText Typo="Typo.h6" Class="mt-2">Login Required</MudText>
+                        <MudText Typo="Typo.body2" Class="mb-4">
+                            You must be logged in to view and link your bank accounts.
+                        </MudText>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@GoToLogin">
+                            <MudIcon Icon="@Icons.Material.Filled.Login" Class="me-2" />
+                            Go to Login
+                        </MudButton>
+                    </MudPaper>
+                </MudItem>
+            </MudGrid>
+        </NotAuthorized>
+    </AuthorizeView>
+</MudPaper>
+
+@code {
+    private List<PlaidAccount> linkedAccounts;
+    private bool isRefreshing = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var token = await JwtAuthProvider.GetTokenAsync();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, "api/accounts/user-accounts");
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            var response = await Http.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                linkedAccounts = JsonSerializer.Deserialize<List<PlaidAccount>>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                NavManager.NavigateTo("/auth/login");
+            }
+            else
+            {
+                linkedAccounts = new List<PlaidAccount>(); // empty fallback
+                Console.Error.WriteLine($"Error fetching accounts: {response.StatusCode}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Exception fetching accounts: {ex.Message}");
+            linkedAccounts = new List<PlaidAccount>(); // empty fallback
+        }
+    }
+
+    private void GoToLogin()
+    {
+        NavManager.NavigateTo("/auth/login");
+    }
+
+    private async Task StartPlaidLink()
+    {
+        var token = await JwtAuthProvider.GetTokenAsync();
+        var request = new HttpRequestMessage(HttpMethod.Post, "api/plaid/link-token");
+        request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+        var response = await Http.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+
+        var json = await response.Content.ReadAsStringAsync();
+        var obj = JsonDocument.Parse(json);
+        var linkToken = obj.RootElement.GetProperty("link_token").GetString();
+        await JS.InvokeVoidAsync("openPlaidLink", linkToken, DotNetObjectReference.Create(this));
+    }
+
+    [JSInvokable]
+    public async Task OnPlaidSuccess(string publicToken)
+    {
+        var token = await JwtAuthProvider.GetTokenAsync();
+        var request = new HttpRequestMessage(HttpMethod.Post, "api/plaid/exchange-public-token");
+        request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+        request.Content = JsonContent.Create(new { PublicToken = publicToken });
+
+        var response = await Http.SendAsync(request);
+        if (response.IsSuccessStatusCode)
+        {
+            // Optionally parse response or update UI
+            Console.WriteLine("Successfully exchanged public token");
+        }
+        else
+        {
+            var error = await response.Content.ReadAsStringAsync();
+            Console.Error.WriteLine($"Failed to exchange token: {error}");
+        }
+    }
+
+    private async Task RefreshBalances()
+    {
+        isRefreshing = true;
+        try
+        {
+            var token = await JwtAuthProvider.GetTokenAsync();
+
+            var request = new HttpRequestMessage(HttpMethod.Post, "api/plaid/refresh-balances");
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            var response = await Http.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                // Refresh UI list after update
+                await OnInitializedAsync();
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                Console.Error.WriteLine($"Error refreshing balances: {error}");
+            }
+        }
+        finally
+        {
+            isRefreshing = false;
+        }
+    }
+
+}

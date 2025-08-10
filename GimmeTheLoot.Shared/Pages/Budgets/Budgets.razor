@@ -1,0 +1,32 @@
+@page "/budgets"
+
+<MudTable Items="@_budgets" Hover="true">
+    <HeaderContent>
+        <MudTh>Category</MudTh>
+        <MudTh>Budgeted</MudTh>
+        <MudTh>Spent</MudTh>
+        <MudTh>Remaining</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>@context.Category</MudTd>
+        <MudTd>@context.BudgetedAmount.ToString("C")</MudTd>
+        <MudTd>@context.SpentAmount.ToString("C")</MudTd>
+        <MudTd>@((context.BudgetedAmount - context.SpentAmount).ToString("C"))</MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code {
+    private List<BudgetItem> _budgets = new()
+    {
+        new BudgetItem { Category = "Food", BudgetedAmount = 500m, SpentAmount = 320m },
+        new BudgetItem { Category = "Entertainment", BudgetedAmount = 150m, SpentAmount = 75m },
+        new BudgetItem { Category = "Transportation", BudgetedAmount = 100m, SpentAmount = 110m }
+    };
+
+    public class BudgetItem
+    {
+        public string Category { get; set; } = "";
+        public decimal BudgetedAmount { get; set; }
+        public decimal SpentAmount { get; set; }
+    }
+}

@@ -1,0 +1,56 @@
+﻿@implements IDisposable
+@inject NavigationManager NavManager
+@inject JwtAuthenticationStateProvider JwtAuthProvider
+
+<MudNavMenu Style="display: flex; flex-flow: column; height: inherit;">
+    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">Dashboard</MudNavLink>
+    <MudNavLink Href="accounts" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AccountBalanceWallet">Accounts</MudNavLink>
+    <AuthorizeView>
+        <Authorized>
+            <MudNavLink Href="transactions" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AttachMoney">Transactions</MudNavLink>
+            <MudNavLink Href="budgets" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.DataSaverOn">Budgets</MudNavLink>
+            <MudNavLink Href="insights" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Insights">Insights</MudNavLink>
+        </Authorized>
+    </AuthorizeView>
+
+    <div style="flex-grow: 1"></div>
+
+    <AuthorizeView>
+        <Authorized>
+            <MudNavLink Href="settings" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Settings">Settings</MudNavLink>
+            <MudNavLink Icon="@Icons.Material.Filled.ExitToApp" OnClick="Logout">Logout</MudNavLink>
+        </Authorized>
+        <NotAuthorized>
+            <MudNavLink Href="auth/register" Icon="@Icons.Material.Filled.AppRegistration">Register</MudNavLink>
+            <MudNavLink Href="auth/login" Icon="@Icons.Material.Filled.Login">Login</MudNavLink>
+        </NotAuthorized>
+    </AuthorizeView>
+</MudNavMenu>
+
+@code {
+    private string? currentUrl;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUrl = NavManager.ToBaseRelativePath(NavManager.Uri);
+        NavManager.LocationChanged += OnLocationChanged;
+        await base.OnInitializedAsync();
+    }
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        currentUrl = NavManager.ToBaseRelativePath(e.Location);
+        StateHasChanged();
+    }
+
+    private async Task Logout()
+    {
+        await JwtAuthProvider.LogoutAsync();
+        NavManager.NavigateTo("/auth/login");
+    }
+
+    public void Dispose()
+    {
+        NavManager.LocationChanged -= OnLocationChanged;
+    }
+}
